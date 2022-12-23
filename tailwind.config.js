@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         gray1: "#4b4b4b",
         purple1: "#40005d",
+        white1: "#ccc",
+      },
+      numbers: {
+        200: "50rem",
       },
     },
   },
