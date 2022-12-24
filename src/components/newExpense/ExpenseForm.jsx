@@ -1,35 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ExpenseContext } from "../../context/ExpenseContext";
+
+const Input = ({ placeholder, name, type, value, handleChange }) => (
+  <input
+    placeholder={placeholder}
+    type={type}
+    step="0.01"
+    min="2019-01-01"
+    max="2023-12-31"
+    value={value}
+    onChange={(e) => handleChange(e, name)}
+    className="font-inherit p-2 rounded-md border border-solid border-white1 w-[20rem] max-w-[100%]"
+  />
+);
 
 const ExpenseForm = (props) => {
-  const [newTitle, setTitle] = useState("");
-  const [newAmount, setAmount] = useState("");
-  const [newDate, setDate] = useState("");
-  const titleChangeHandler = (event) => {
-    setTitle(event.target.value);
-  };
+  const { formData, handleChange } = useContext(ExpenseContext);
 
-  const amountChangeHandler = (event) => {
-    setAmount(event.target.value);
-  };
+  // const [newTitle, setTitle] = useState("");
+  // const [newAmount, setAmount] = useState("");
+  // const [newDate, setDate] = useState("");
+  // const titleChangeHandler = (event) => {
+  //   setTitle(event.target.value);
+  // };
 
-  const dateChangeHandler = (event) => {
-    setDate(event.target.value);
-  };
+  // const amountChangeHandler = (event) => {
+  //   setAmount(event.target.value);
+  // };
+
+  // const dateChangeHandler = (event) => {
+  //   setDate(event.target.value);
+  // };
 
   const submitHandler = (event) => {
+    const { title, amount, date } = formData;
     event.preventDefault(); // what is do
 
-    const expenseData = {
-      title: newTitle,
-      amount: newAmount,
-      date: new Date(newDate),
-    };
+    // const expenseData = {
+    //   title: newTitle,
+    //   amount: newAmount,
+    //   date: new Date(newDate),
+    // };
 
-    props.onSaveExpenseData(expenseData);
+    // props.onSaveExpenseData(expenseData);
 
-    setTitle("");
-    setAmount("");
-    setDate("");
+    // setTitle("");
+    // setAmount("");
+    // setDate("");
   };
 
   return (
@@ -37,17 +54,23 @@ const ExpenseForm = (props) => {
       <div className="flex flex-wrap gap-4 mb-4 text-left">
         <div className="">
           <label className="font-bold mb-2 block">Title</label>
-          <input
+          {/* <input
             type="text"
             placeholder="Activity or Item name"
             onChange={titleChangeHandler}
             value={newTitle}
             className="font-inherit p-2 rounded-md border border-solid border-white1 w-[20rem] max-w-[100%]"
+          /> */}
+          <Input
+            placeholder="Activity or Item name"
+            name="title"
+            type="text"
+            handleChange={handleChange}
           />
         </div>
         <div>
           <label className="font-bold mb-2 block">Amount</label>
-          <input
+          {/* <input
             type="number"
             placeholder="Cost"
             onChange={amountChangeHandler}
@@ -55,17 +78,29 @@ const ExpenseForm = (props) => {
             min="0.01"
             step="0.01"
             className="font-inherit p-2 rounded-md border border-solid border-white1 w-[20rem] max-w-[100%]"
+          /> */}
+          <Input
+            placeholder="Cost"
+            name="amount"
+            type="number"
+            handleChange={handleChange}
           />
         </div>
         <div>
           <label className="font-bold mb-2 block">Date</label>
-          <input
+          {/* <input
             type="date"
             onChange={dateChangeHandler}
             value={newDate}
             min="2019-01-01"
             max="2023-12-31"
             className="font-inherit p-2 rounded-md border border-solid border-white1 w-[20rem] max-w-[100%]"
+          /> */}
+          <Input
+            placeholder=""
+            name="date"
+            type="date"
+            handleChange={handleChange}
           />
         </div>
       </div>
