@@ -3,20 +3,28 @@ import React, { useEffect, useState } from "react";
 export const ExpenseContext = React.createContext();
 
 export const ExpenseProvider = ({ children }) => {
-  const [expenseDatas, setExpenseDatas] = useState([]);
-  const [formData, setFormData] = useState({
-    title: "",
-    amount: "",
-    date: "",
-  });
+  const [expenseDatas, setExpenseDatas] = useState([
+    {
+      title: "",
+      amount: "",
+      date: "",
+    },
+  ]);
 
-  const handleChange = (e, name) => {
-    setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
-    console.log("handleChange: " + formData[0]);
+  const submitForm = (title, amount, date) => {
+    const newArray = [...expenseDatas, { title, amount, date }];
+
+    setExpenseDatas(newArray);
+  };
+
+  const getExpenseData = () => {
+    console.log(expenseDatas);
   };
 
   return (
-    <ExpenseContext.Provider value={{ expenseDatas, formData, handleChange }}>
+    <ExpenseContext.Provider
+      value={{ expenseDatas, getExpenseData, submitForm }}
+    >
       {children}
     </ExpenseContext.Provider>
   );
