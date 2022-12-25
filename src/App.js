@@ -4,11 +4,7 @@ const App = () => {
   return (
     <div>
       <NewExpense />
-      <Expense
-        date={new Date(2022, 5, 12)}
-        title="Car insurance"
-        amount={297.63}
-      />
+      <Expense />
     </div>
   );
 };
